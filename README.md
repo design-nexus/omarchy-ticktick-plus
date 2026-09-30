@@ -54,8 +54,12 @@ No external Python packages, no build step, and nothing is compiled.
 
 ## Install
 
-The plugin lives in `~/.config/omarchy/plugins/design-nexus.ticktick/`. With
-the folder in place:
+```bash
+omarchy plugin add https://github.com/design-nexus/omarchy-ticktick-plus.git --enable
+```
+
+That clones it into `~/.config/omarchy/plugins/design-nexus.ticktick/` and
+puts the widget on the bar. If you copied the folder there yourself instead:
 
 ```bash
 omarchy-shell shell rescanPlugins
