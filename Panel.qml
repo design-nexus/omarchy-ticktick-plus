@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 import "Model.js" as Model
 
@@ -786,7 +787,7 @@ Panel {
 
   // ---- surface ----------------------------------------------------------
 
-  readonly property color fg: Color.popups.text
+  readonly property color fg: Commons.Color.popups.text
   readonly property color muted: Qt.darker(fg, 1.5)
 
   KeyboardPanel {
@@ -915,7 +916,7 @@ Panel {
                     // which list was clear once lists could be shown.
                     text: root.currentViewTitle
                     textFormat: Text.PlainText
-                    color: viewSwitch.containsMouse ? Color.accent : root.fg
+                    color: viewSwitch.containsMouse ? Commons.Color.accent : root.fg
                     font.family: Style.font.family
                     font.pixelSize: Style.font.title
                     font.bold: true
@@ -926,7 +927,7 @@ Panel {
                   Text {
                     anchors.verticalCenter: viewLabel.verticalCenter
                     text: root.pickerMode === "view" ? "\u25B4" : "\u25BE"
-                    color: viewSwitch.containsMouse ? Color.accent : root.muted
+                    color: viewSwitch.containsMouse ? Commons.Color.accent : root.muted
                     font.family: Style.font.family
                     font.pixelSize: Style.font.bodySmall
                   }
@@ -963,7 +964,7 @@ Panel {
               anchors.verticalCenter: parent.verticalCenter
               visible: root.queuedCount > 0
               text: " " + root.queuedCount
-              color: Color.accent
+              color: Commons.Color.accent
               font.family: Style.font.family
               font.pixelSize: Style.font.caption
 
@@ -992,7 +993,7 @@ Panel {
               tooltipText: root.currentIsDefault
                 ? root.currentViewTitle + " opens first"
                 : "Open on " + root.currentViewTitle + " by default  (D)"
-              foreground: root.currentIsDefault ? Color.accent : root.muted
+              foreground: root.currentIsDefault ? Commons.Color.accent : root.muted
               onClicked: root.saveCurrentAsDefault()
             }
 
@@ -1003,7 +1004,7 @@ Panel {
               anchors.verticalCenter: parent.verticalCenter
               iconText: ""
               tooltipText: "Keyboard shortcuts  (?)"
-              foreground: root.helpVisible ? Color.accent : root.muted
+              foreground: root.helpVisible ? Commons.Color.accent : root.muted
               onClicked: root.helpVisible = !root.helpVisible
             }
 
@@ -1043,7 +1044,7 @@ Panel {
                 required property var modelData
                 text: modelData.label
                 textFormat: Text.PlainText
-                color: optionHover.containsMouse || modelData.active ? Color.accent : root.muted
+                color: optionHover.containsMouse || modelData.active ? Commons.Color.accent : root.muted
                 font.family: Style.font.family
                 font.pixelSize: Style.font.caption
 
@@ -1111,7 +1112,7 @@ Panel {
                   ? Qt.rgba(root.fg.r, root.fg.g, root.fg.b, 0.08)
                   : "transparent"
                 border.width: selected && root.cursorActive ? 1 : 0
-                border.color: Qt.rgba(Color.accent.r, Color.accent.g, Color.accent.b, 0.55)
+                border.color: Qt.rgba(Commons.Color.accent.r, Commons.Color.accent.g, Commons.Color.accent.b, 0.55)
 
                 // A thin rule between the ranges and the lists, where
                 // TickTick's own sidebar draws one.
@@ -1163,7 +1164,7 @@ Panel {
                     text: pickerRow.modelData.title
                     textFormat: Text.PlainText
                     color: !pickerRow.selectable ? root.muted
-                      : (pickerRow.current ? Color.accent : root.fg)
+                      : (pickerRow.current ? Commons.Color.accent : root.fg)
                     font.family: Style.font.family
                     font.pixelSize: Style.font.bodySmall
                     font.bold: pickerRow.current
@@ -1249,13 +1250,13 @@ Panel {
                         implicitWidth: keyText.implicitWidth + Style.space(6)
                         height: keyText.implicitHeight + Style.space(2)
                         radius: Style.space(3)
-                        color: Qt.rgba(Color.accent.r, Color.accent.g, Color.accent.b, 0.13)
+                        color: Qt.rgba(Commons.Color.accent.r, Commons.Color.accent.g, Commons.Color.accent.b, 0.13)
 
                         Text {
                           id: keyText
                           anchors.centerIn: parent
                           text: shortcutRow.modelData.key
-                          color: Color.accent
+                          color: Commons.Color.accent
                           font.family: Style.font.family
                           font.pixelSize: Style.font.caption
                           font.bold: true
@@ -1282,7 +1283,7 @@ Panel {
             height: root.pendingAction ? Style.space(28) : 0
             visible: root.pendingAction !== null
             radius: Style.space(4)
-            color: Qt.rgba(Color.accent.r, Color.accent.g, Color.accent.b, 0.14)
+            color: Qt.rgba(Commons.Color.accent.r, Commons.Color.accent.g, Commons.Color.accent.b, 0.14)
 
             Row {
               anchors.fill: parent
@@ -1293,7 +1294,7 @@ Panel {
               Text {
                 anchors.verticalCenter: parent.verticalCenter
                 text: ""
-                color: Color.accent
+                color: Commons.Color.accent
                 font.family: Style.font.family
                 font.pixelSize: Style.font.icon
               }
@@ -1328,7 +1329,7 @@ Panel {
                 id: undoCount
                 anchors.verticalCenter: parent.verticalCenter
                 text: "undo " + root.undoLeft + "s"
-                color: Color.accent
+                color: Commons.Color.accent
                 font.family: Style.font.family
                 font.pixelSize: Style.font.bodySmall
                 font.bold: true
@@ -1521,7 +1522,7 @@ Panel {
                 text: carriesLate
                   ? root.visibleTasks.length + " · " + root.overdueCount + " LATE"
                   : String(root.visibleTasks.length)
-                foreground: carriesLate ? Color.accent : root.muted
+                foreground: carriesLate ? Commons.Color.accent : root.muted
               }
             }
 
@@ -1570,7 +1571,7 @@ Panel {
                     text: taskCell.group
                       ? Model.plainText(taskCell.group.title).toUpperCase() + " · " + taskCell.group.count
                       : ""
-                    foreground: taskCell.lateGroup ? Color.accent : root.muted
+                    foreground: taskCell.lateGroup ? Commons.Color.accent : root.muted
                   }
 
                   // The rule stops short of the count rather than running
@@ -1613,7 +1614,7 @@ Panel {
                   // states deserve two different marks, not two strengths of
                   // the same one.
                   border.width: taskRow.selected ? 1 : 0
-                  border.color: Qt.rgba(Color.accent.r, Color.accent.g, Color.accent.b, 0.55)
+                  border.color: Qt.rgba(Commons.Color.accent.r, Commons.Color.accent.g, Commons.Color.accent.b, 0.55)
 
                   // Row-wide hover for the highlight only. It deliberately
                   // accepts no buttons: completion is irreversible from here,
@@ -1663,7 +1664,7 @@ Panel {
                         anchors.centerIn: parent
                         opacity: taskRow.pending ? 0.45 : 1
                         text: circleHover.containsMouse ? "" : ""
-                        color: taskRow.late ? Color.accent : root.muted
+                        color: taskRow.late ? Commons.Color.accent : root.muted
                         font.family: Style.font.family
                         font.pixelSize: Style.font.icon
                       }
@@ -1767,7 +1768,7 @@ Panel {
                       anchors.verticalCenter: parent.verticalCenter
                       text: taskRow.pending ? "adding…" : Model.dueLabel(taskRow.modelData, root.nowDate)
                       color: taskRow.tier === "overdue"
-                        ? Color.accent
+                        ? Commons.Color.accent
                         : (taskRow.tier === "today" ? root.fg : root.muted)
                       font.family: Style.font.family
                       font.pixelSize: Style.font.caption
@@ -1895,7 +1896,7 @@ Panel {
                             Text {
                               anchors.centerIn: parent
                               text: subtaskRow.modelData.done ? "\u2611" : "\u2610"
-                              color: subtaskRow.modelData.done ? Color.accent : root.muted
+                              color: subtaskRow.modelData.done ? Commons.Color.accent : root.muted
                               font.family: Style.font.family
                               font.pixelSize: Style.font.bodySmall
                             }
@@ -1954,16 +1955,16 @@ Panel {
                           height: parent.height
                           radius: Style.space(4)
                           color: chip.selected || chipHover.containsMouse
-                            ? Qt.rgba(Color.accent.r, Color.accent.g, Color.accent.b, 0.22)
+                            ? Qt.rgba(Commons.Color.accent.r, Commons.Color.accent.g, Commons.Color.accent.b, 0.22)
                             : Qt.rgba(root.fg.r, root.fg.g, root.fg.b, 0.07)
                           border.width: chip.current ? 1 : 0
-                          border.color: Color.accent
+                          border.color: Commons.Color.accent
 
                           Text {
                             id: chipText
                             anchors.centerIn: parent
                             text: chip.modelData.label
-                            color: chip.selected || chipHover.containsMouse || chip.current ? Color.accent : root.fg
+                            color: chip.selected || chipHover.containsMouse || chip.current ? Commons.Color.accent : root.fg
                             font.family: Style.font.family
                             font.pixelSize: Style.font.caption
                           }
@@ -2043,7 +2044,7 @@ Panel {
                   ? Qt.rgba(root.fg.r, root.fg.g, root.fg.b, 0.08)
                   : "transparent"
                 border.width: habitRow.selected ? 1 : 0
-                border.color: Qt.rgba(Color.accent.r, Color.accent.g, Color.accent.b, 0.55)
+                border.color: Qt.rgba(Commons.Color.accent.r, Commons.Color.accent.g, Commons.Color.accent.b, 0.55)
 
                 // Parity with tasks: the row highlights, the circle acts.
                 // Clicking a habit's name used to check it in, which is the
@@ -2073,7 +2074,7 @@ Panel {
                     Text {
                       anchors.centerIn: parent
                       text: habitRow.progress.done ? "" : ""
-                      color: habitRow.progress.done ? Color.accent : root.muted
+                      color: habitRow.progress.done ? Commons.Color.accent : root.muted
                       font.family: Style.font.family
                       font.pixelSize: Style.font.icon
                     }
@@ -2159,7 +2160,7 @@ Panel {
                 Text {
                   anchors.verticalCenter: parent.verticalCenter
                   text: ""
-                  color: root.pomoPhase === "focus" ? Color.accent : root.muted
+                  color: root.pomoPhase === "focus" ? Commons.Color.accent : root.muted
                   font.family: Style.font.family
                   font.pixelSize: Style.font.icon
                 }
@@ -2228,7 +2229,7 @@ Panel {
               Text {
                 id: escapeLabel
                 text: "Open in TickTick"
-                color: escapeHover.containsMouse ? Color.accent : root.muted
+                color: escapeHover.containsMouse ? Commons.Color.accent : root.muted
                 font.family: Style.font.family
                 font.pixelSize: Style.font.caption
               }
@@ -2236,7 +2237,7 @@ Panel {
               Text {
                 anchors.verticalCenter: escapeLabel.verticalCenter
                 text: ""
-                color: escapeHover.containsMouse ? Color.accent : root.muted
+                color: escapeHover.containsMouse ? Commons.Color.accent : root.muted
                 font.family: Style.font.family
                 font.pixelSize: Style.font.caption
               }
@@ -2265,7 +2266,7 @@ Panel {
             wrapMode: Text.WordWrap
             text: root.actionError !== "" ? root.actionError : root.cacheError
             textFormat: Text.PlainText
-            color: Color.accent
+            color: Commons.Color.accent
             font.family: Style.font.family
             font.pixelSize: Style.font.caption
           }
